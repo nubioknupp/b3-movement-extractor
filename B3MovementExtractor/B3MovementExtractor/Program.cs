@@ -18,6 +18,10 @@ namespace B3MovementExtractor // Note: actual namespace depends on the project n
 
             if (string.IsNullOrWhiteSpace(pathFileCsv)) pathFileCsv = "/Users/nubioknupp/Downloads/mov.csv";
 
+            Console.WriteLine("Adicionar o cabeçalho nos arquivos de proventos? [S]im | [N]ão (Padrão: Não)");
+
+            var isHeader = Console.ReadLine()?.ToUpper() == "S" ? true : false;
+
             var institutions = new List<FinancialInstitution>
             {
                 new FinancialInstitution { Name = "XP INVESTIMENTOS CCTVM S/A", Alias = "RICO" },
@@ -30,7 +34,7 @@ namespace B3MovementExtractor // Note: actual namespace depends on the project n
 
             foreach (var institution in institutions)
             {
-                var dividends = MovementExtractor.ExtractEarnings(fileCsvAllLines, institution);
+                var dividends = MovementExtractor.ExtractEarnings(fileCsvAllLines, institution, isHeader);
                 var nomeFile = $"{institution.Alias} Proventos {now}.csv";
 
                 File.WriteAllLines(pathSaveCsv + nomeFile, dividends, Encoding.UTF8);

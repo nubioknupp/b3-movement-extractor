@@ -5,16 +5,17 @@ namespace B3MovementExtractor
 {
     public class MovementExtractor
     {
-        public static List<string> ExtractEarnings(string[] fileLines, FinancialInstitution institution)
+        public static List<string> ExtractEarnings(string[] fileLines, FinancialInstitution institution, bool isHeader)
         {
-            var earnings = new List<string>()
-            {
-                "Nome do Ativo\tTicket do Ativo\tData de Pagamento\tTipo de Evento\tValor líquido\tCorretora\tQuantidade\tValor unitário"
-            };
+            var earnings = new List<string>();
             var lines = fileLines?.Where(line => line.Contains(MovementType.Dividend) ||
                                                  line.Contains(MovementType.InterestOnEquity) ||
                                                  line.Contains(MovementType.Income))
                                  ?.Where( x => x.Contains(institution.Name)) ?? new List<string>();
+            if (isHeader)
+            {
+                earnings.Add("Nome do Ativo\tTicket do Ativo\tData de Pagamento\tTipo de Evento\tValor líquido\tCorretora\tQuantidade\tValor unitário");
+            }
 
             foreach (var line in lines)
             {

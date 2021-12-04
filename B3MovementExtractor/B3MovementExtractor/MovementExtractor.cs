@@ -21,7 +21,7 @@ namespace B3MovementExtractor
             {
                 var lineSplit = line.Split(";");
                 var ticket = lineSplit[3].Split("-")[0].Trim();
-                var name = lineSplit[3].Split("-")[1].Trim();
+                var name = lineSplit[3].Trim();
                 var date = lineSplit[1].Trim();
                 var type = lineSplit[2].Trim();
                 var amount = lineSplit[7].Trim().Replace("R$", "");
@@ -29,6 +29,15 @@ namespace B3MovementExtractor
                 var unitaryValue = lineSplit[6].Trim().Replace("R$", "");
 
                 type = type.Replace(MovementType.InterestOnEquity, "JRS CAP PROPRIO");
+
+                if (line.Contains(MovementType.Income) && ticket.Contains("13"))
+                {
+                    ticket = ticket.Replace("13", "11");
+                }
+                else if (line.Contains(MovementType.Income) && ticket.Contains("14"))
+                {
+                    ticket = ticket.Replace("14", "11");
+                }
 
                 var str = $"{name}\t{ticket}\t{date}\t{type.ToUpper()}\t{amount}\t{institution.Alias}\t{count}\t{unitaryValue}";
 

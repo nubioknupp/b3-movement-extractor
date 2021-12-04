@@ -21,7 +21,6 @@ namespace B3MovementExtractor // Note: actual namespace depends on the project n
             Console.WriteLine("Adicionar o cabeçalho nos arquivos de proventos? [S]im | [N]ão (Padrão: Não)");
 
             var isHeader = Console.ReadLine()?.ToUpper() == "S" ? true : false;
-
             var institutions = new List<FinancialInstitution>
             {
                 new FinancialInstitution { Name = "XP INVESTIMENTOS CCTVM S/A", Alias = "RICO" },
@@ -32,17 +31,25 @@ namespace B3MovementExtractor // Note: actual namespace depends on the project n
             var inputSplit = pathFileCsv.Contains('/') ? pathFileCsv.Split("/") : pathFileCsv.Split(@"\");
             var pathSaveCsv = pathFileCsv.Replace(inputSplit[^1], "");
 
+            Console.WriteLine("Arquivos gerados:");
+
             foreach (var institution in institutions)
             {
                 var dividends = MovementExtractor.ExtractEarnings(fileCsvAllLines, institution, isHeader);
                 var nomeFile = $"{institution.Alias} Proventos {now}.csv";
+                var fileEarning = pathSaveCsv + nomeFile;
 
-                File.WriteAllLines(pathSaveCsv + nomeFile, dividends, Encoding.UTF8);
+                File.WriteAllLines(fileEarning, dividends, Encoding.UTF8);
+
+                Console.WriteLine(fileEarning);
             }
 
             var others = MovementExtractor.ExtractOtherWithoutTransferAndEarnings(fileCsvAllLines);
+            var fileOthers = $"{pathSaveCsv}others {now}.csv";
 
-            File.WriteAllLines($"{pathSaveCsv}others {now}.csv", others, Encoding.UTF8);
+            File.WriteAllLines(fileOthers, others, Encoding.UTF8);
+
+            Console.WriteLine(fileOthers);
         }
     }
 }

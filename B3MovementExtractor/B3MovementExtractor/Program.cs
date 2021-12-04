@@ -25,7 +25,7 @@ namespace B3MovementExtractor // Note: actual namespace depends on the project n
                 new FinancialInstitution { Name = "INTER DISTRIBUIDORA DE TITULOS E VALORES MOBILIARIOS LTDA", Alias = "INTER" },
             };
             var fileCsvAllLines = File.ReadAllLines(pathFileCsv, Encoding.UTF8);
-            var inputSplit = pathFileCsv.Split("/");
+            var inputSplit = pathFileCsv.Contains('/') ? pathFileCsv.Split("/") : pathFileCsv.Split(@"\");
             var pathSaveCsv = pathFileCsv.Replace(inputSplit[^1], "");
 
             foreach (var institution in institutions)

@@ -23,9 +23,9 @@ namespace B3MovementExtractor // Note: actual namespace depends on the project n
             var isHeader = Console.ReadLine()?.ToUpper() == "S" ? true : false;
             var institutions = new List<FinancialInstitution>
             {
-                new FinancialInstitution { Name = "XP INVESTIMENTOS CCTVM S/A", Alias = "RICO" },
-                new FinancialInstitution { Name = "CLEAR CORRETORA - GRUPO XP", Alias = "CLEAR" },
-                new FinancialInstitution { Name = "INTER DISTRIBUIDORA DE TITULOS E VALORES MOBILIARIOS LTDA", Alias = "INTER" },
+                new FinancialInstitution { Name = "XP INVESTIMENTOS CCTVM S/A", ShortName = "XP INVESTIMENTOS CCTVM S/A", Alias = "RICO" },
+                new FinancialInstitution { Name = "CLEAR CORRETORA - GRUPO XP", ShortName = "CLEAR CORRETORA - GRUPO XP", Alias = "CLEAR" },
+                new FinancialInstitution { Name = "INTER DISTRIBUIDORA DE TITULOS E VALORES MOBILIARIOS LTDA", ShortName = "INTER DTVM LTDA", Alias = "INTER" },
             };
             var fileCsvAllLines = File.ReadAllLines(pathFileCsv, Encoding.UTF8);
             var inputSplit = pathFileCsv.Contains('/') ? pathFileCsv.Split("/") : pathFileCsv.Split(@"\");

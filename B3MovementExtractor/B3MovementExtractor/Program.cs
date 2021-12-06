@@ -30,8 +30,11 @@ namespace B3MovementExtractor // Note: actual namespace depends on the project n
             var fileCsvAllLines = File.ReadAllLines(pathFileCsv, Encoding.UTF8);
             var inputSplit = pathFileCsv.Contains('/') ? pathFileCsv.Split("/") : pathFileCsv.Split(@"\");
             var pathSaveCsv = pathFileCsv.Replace(inputSplit[^1], "");
+            var logs = new List<string>();
+            var countLine = 0;
+            var countTransfer = fileCsvAllLines.Count(x => x.Contains(MovementType.TransferSettlement));
 
-            Console.WriteLine("Arquivos gerados:");
+            Console.WriteLine("\nArquivos gerados:");
 
             foreach (var institution in institutions)
             {
@@ -42,14 +45,22 @@ namespace B3MovementExtractor // Note: actual namespace depends on the project n
                 File.WriteAllLines(fileEarning, dividends, Encoding.UTF8);
 
                 Console.WriteLine(fileEarning);
+                countLine += dividends.Count;
+                logs.Add($"\t- Proventos {institution.Alias}: {dividends.Count}");
             }
 
             var others = MovementExtractor.ExtractOtherWithoutTransferAndEarnings(fileCsvAllLines);
             var fileOthers = $"{pathSaveCsv}others {now}.csv";
 
-            File.WriteAllLines(fileOthers, others, Encoding.UTF8);
-
             Console.WriteLine(fileOthers);
+            File.WriteAllLines(fileOthers, others, Encoding.UTF8);
+            countLine += others.Count;
+            logs.Add($"\t- Others: {others.Count}");
+            logs.Add($"\t- {MovementType.TransferSettlement}: {countTransfer}");
+            countLine += countTransfer;
+            logs.Add($"Total: {countLine}");
+            Console.WriteLine("\nLogs:");
+            Console.WriteLine(string.Join("\n", logs));
         }
     }
 }

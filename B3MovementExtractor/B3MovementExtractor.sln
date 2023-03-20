@@ -5,6 +5,8 @@ VisualStudioVersion = 25.0.1700.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "B3MovementExtractor", "B3MovementExtractor\B3MovementExtractor.csproj", "{0F8DC725-F85E-4FAB-BB49-2E6DF3A6FDDF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "B3MovementExtractorWeb", "B3MovementExtractorWeb\B3MovementExtractorWeb.csproj", "{6390257A-4431-44FA-93DC-DCE619B88927}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{0F8DC725-F85E-4FAB-BB49-2E6DF3A6FDDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0F8DC725-F85E-4FAB-BB49-2E6DF3A6FDDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0F8DC725-F85E-4FAB-BB49-2E6DF3A6FDDF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6390257A-4431-44FA-93DC-DCE619B88927}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6390257A-4431-44FA-93DC-DCE619B88927}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6390257A-4431-44FA-93DC-DCE619B88927}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6390257A-4431-44FA-93DC-DCE619B88927}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

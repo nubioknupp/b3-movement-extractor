@@ -6,7 +6,7 @@ namespace B3MovementExtractorWeb.Helpers
 {
     public class ExcelHelper
     {
-        public static async Task<string[]> ToStringFormatCSV(IFormFile file)
+        public static async Task<IEnumerable<string>> ToStringFormatCSV(IFormFile file)
         {
             string[] contents;
             var fileCSVPath = $"{Path.GetTempPath()}OutputCSV-{Guid.NewGuid()}.csv";
@@ -28,7 +28,7 @@ namespace B3MovementExtractorWeb.Helpers
                 File.Delete(fileCSVPath);
             }
 
-            return contents;
+            return contents.Where(line => !line.Contains("Aspose.Cells"));
         }
     }
 }

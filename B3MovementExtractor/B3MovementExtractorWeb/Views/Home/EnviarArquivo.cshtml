@@ -1,0 +1,36 @@
+﻿@{
+    ViewData["Title"] = "Resultado";
+}
+
+<div class="text-center">
+    <h1>Resultado do Processamento</h1>
+    <hr />
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <div class="row">
+                <section>
+                    @foreach (var institution in (List<FinancialInstitution>) ViewData["FinancialInstitutions"])
+                    {
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <p style="font-size: x-large;"><b>Movimentações de Proventos (@institution.Alias):</b></p>
+                                <textarea name="Earnings-@institution.Alias"
+                                          style="height: 300px; width: 100%;">@ViewData[$"Earnings{institution.Alias}"]</textarea>
+                            </div>
+                        </div>
+                        <br />
+                    }
+
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <p style="font-size: x-large;"><b>Outras Movimentações:</b></p>
+                            <textarea name="ExtractOtherWithoutTransferAndEarnings"
+                                      style="height: 300px; width: 100%;">@ViewData["ExtractOtherWithoutTransferAndEarnings"]</textarea>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+

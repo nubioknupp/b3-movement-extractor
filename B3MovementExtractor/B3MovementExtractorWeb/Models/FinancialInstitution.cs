@@ -1,4 +1,4 @@
-﻿namespace B3MovementExtractor
+﻿namespace B3MovementExtractorWeb.Models
 {
     public class FinancialInstitution
     {

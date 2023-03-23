@@ -9,11 +9,14 @@
         <div class="container">
             <div class="row">
                 <section>
-                    @foreach (var institution in (List<FinancialInstitution>) ViewData["FinancialInstitutions"])
+                    @foreach (var institution in (List<FinancialInstitution>)ViewData["FinancialInstitutions"])
                     {
                         <div class="form-group">
                             <div class="col-md-12">
                                 <p style="font-size: x-large;"><b>Movimentações de Proventos (@institution.Alias):</b></p>
+                                <button name="Copy-@institution.Alias" style=" float: left; margin-bottom: 10px;">
+                                    Copiar
+                                </button>
                                 <textarea name="Earnings-@institution.Alias"
                                           style="height: 300px; width: 100%;">@ViewData[$"Earnings{institution.Alias}"]</textarea>
                             </div>
@@ -33,4 +36,25 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    var institutions = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(@ViewData["FinancialInstitutions"]));
+
+    for (let i = 0; i < institutions.length; i++)
+    {
+        var $copyTextareaBtn = document.querySelector(`[name="Copy-${institutions[i].Alias}"]`);
+
+        $copyTextareaBtn.onclick = function () {
+            var $copyTextarea = document.querySelector(`[name="Earnings-${institutions[i].Alias}"]`);
+
+            $copyTextarea.focus();
+            $copyTextarea.select();
+            navigator.clipboard.writeText($copyTextarea.value).then(function () {
+                console.log('Async: Copying to clipboard was successful!');
+            }, function (err) {
+                console.error('Async: Could not copy text: ', err);
+            });
+        }
+    }
+</script>
 

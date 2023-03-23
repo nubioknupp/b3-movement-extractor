@@ -10,7 +10,7 @@ namespace B3MovementExtractorWeb.Helpers
         {
             var earnings = new List<string>();
             var linesInstitution = fileLines.Where(x => x.Contains(institution.Name) || x.Contains(institution.ShortName));
-            var linesEarning = linesInstitution.Where(line => !line.Contains(MovementType.IncomeCanceled) && 
+            var linesEarning = linesInstitution.Where(line => !line.Contains(MovementType.IncomeCanceled) &&
                                                               (line.Contains(MovementType.Dividend) ||
                                                               line.Contains(MovementType.InterestOnEquity) ||
                                                               line.Contains(MovementType.Income)));
@@ -27,7 +27,15 @@ namespace B3MovementExtractorWeb.Helpers
                 var amountBrute = unitaryValue * count;
                 var irrf = (amountBrute - amountLiquid).ToString().Replace(".", ",");
 
-                type = type.Replace(MovementType.InterestOnEquity, "JSCP");
+                if (type is not MovementType.InterestOnEquity)
+                {
+                    amountBrute = amountLiquid;
+                    irrf = "0";
+                }
+                else
+                {
+                    type = "JSCP";
+                }
 
                 if (line.Contains(MovementType.Income) && ticket.Contains("13"))
                 {

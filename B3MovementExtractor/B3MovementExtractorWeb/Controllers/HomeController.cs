@@ -36,15 +36,15 @@ public class HomeController : Controller
                                {
                                    new FinancialInstitution
                                    {
-                                       Name = "XP INVESTIMENTOS CCTVM S/A",
-                                       ShortName = "XP INVESTIMENTOS CCTVM S/A",
-                                       Alias = "RICO"
-                                   },
-                                   new FinancialInstitution
-                                   {
                                        Name = "CLEAR CORRETORA - GRUPO XP",
                                        ShortName = "CLEAR CORRETORA - GRUPO XP",
                                        Alias = "CLEAR"
+                                   },
+                                   new FinancialInstitution
+                                   {
+                                       Name = "XP INVESTIMENTOS CCTVM S/A",
+                                       ShortName = "XP INVESTIMENTOS CCTVM S/A",
+                                       Alias = "RICO"
                                    },
                                    new FinancialInstitution
                                    {

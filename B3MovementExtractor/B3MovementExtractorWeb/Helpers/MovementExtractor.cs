@@ -46,10 +46,10 @@ namespace B3MovementExtractorWeb.Helpers
                     ticket = ticket.Replace("14", "11");
                 }
 
-                var str = $"{name}\t{ticket}\t{date}\t{type.ToUpper()}\t{amountBrute.ToString().Replace(".", ",")}" +
+                var str = $"{name}\t{amountLiquid.ToString().Replace(".", ",")}\t{ticket}\t{date}\t{type.ToUpper()}\t" +
+                          $"{amountBrute.ToString().Replace(".", ",")}" +
                           $"\t{irrf.ToString().Replace(".", ",")}\tBRL\t{institution.Alias}\t{count}" +
-                          $"\t{unitaryValue.ToString().Replace(".", ",")}" +
-                          $"\t{amountLiquid.ToString().Replace(".", ",")}";
+                          $"\t{unitaryValue.ToString().Replace(".", ",")}";
 
                 earnings.Add(str);
             }

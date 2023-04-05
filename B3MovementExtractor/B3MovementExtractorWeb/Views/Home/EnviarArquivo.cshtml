@@ -27,6 +27,9 @@
                     <div class="form-group">
                         <div class="col-md-12">
                             <p style="font-size: x-large;"><b>Outras Movimentações:</b></p>
+                            <button name="Copy-ExtractOtherWithoutTransferAndEarnings" style=" float: left; margin-bottom: 10px;">
+                                Copiar
+                            </button>
                             <textarea name="ExtractOtherWithoutTransferAndEarnings"
                                       style="height: 300px; width: 100%;">@ViewData["ExtractOtherWithoutTransferAndEarnings"]</textarea>
                         </div>
@@ -42,11 +45,20 @@
 
     for (let i = 0; i < institutions.length; i++)
     {
-        var $copyTextareaBtn = document.querySelector(`[name="Copy-${institutions[i].Alias}"]`);
+        const $copyTextareaInstitutionBtn = document.querySelector(`[name="Copy-${institutions[i].Alias}"]`);
+        const $copyTextareaInstitution = document.querySelector(`[name="Earnings-${institutions[i].Alias}"]`);
 
+        CopyText($copyTextareaInstitutionBtn, $copyTextareaInstitution);
+    }
+
+    const $copyTextareaOtherMovBtn = document.querySelector('[name="Copy-ExtractOtherWithoutTransferAndEarnings"]');
+    const $copyTextareaOtherMov = document.querySelector('[name="ExtractOtherWithoutTransferAndEarnings"]');
+
+    CopyText($copyTextareaOtherMovBtn, $copyTextareaOtherMov);
+
+    function CopyText($copyTextareaBtn, $copyTextarea)
+    {
         $copyTextareaBtn.onclick = function () {
-            var $copyTextarea = document.querySelector(`[name="Earnings-${institutions[i].Alias}"]`);
-
             $copyTextarea.focus();
             $copyTextarea.select();
             navigator.clipboard.writeText($copyTextarea.value).then(function () {

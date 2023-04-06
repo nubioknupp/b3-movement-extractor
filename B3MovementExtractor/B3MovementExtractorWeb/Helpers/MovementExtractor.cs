@@ -23,7 +23,7 @@ namespace B3MovementExtractorWeb.Helpers
                 var type = lineSplit[2].Trim();
                 var amountLiquid = decimal.Parse(lineSplit[7].Trim().Replace("R$", ""));
                 var count = int.Parse(lineSplit[5].Trim());
-                var unitaryValue = decimal.Parse(lineSplit[6].Trim().Replace("R$", ""));
+                _ = decimal.TryParse(lineSplit[6].Trim().Replace("R$", ""), out var unitaryValue);
                 var amountBrute = unitaryValue * count;
                 var irrf = (amountBrute - amountLiquid).ToString().Replace(".", ",");
 

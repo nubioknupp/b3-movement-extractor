@@ -62,7 +62,6 @@ namespace B3MovementExtractorWeb.Helpers
             var others = fileLines?.Where(line => !line.Contains(MovementType.Dividend) &&
                                                   !line.Contains(MovementType.InterestOnEquity) &&
                                                   !line.Contains(MovementType.Income) &&
-                                                  !line.Contains(MovementType.TransferSettlement) &&
                                                   !line.Contains("Aspose.Cells"))
                                                   ?? new List<string>();
 

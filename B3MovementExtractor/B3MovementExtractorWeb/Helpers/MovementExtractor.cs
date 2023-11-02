@@ -24,13 +24,13 @@ namespace B3MovementExtractorWeb.Helpers
                 var amountLiquid = decimal.Parse(lineSplit[7].Trim().Replace("R$", ""));
                 var count = int.Parse(lineSplit[5].Trim());
                 _ = decimal.TryParse(lineSplit[6].Trim().Replace("R$", ""), out var unitaryValue);
-                var amountBrute = unitaryValue * count;
-                var irrf = (amountBrute - amountLiquid).ToString().Replace(".", ",");
+                var irrf = decimal.Round(amountLiquid * 0.15M, 2);
+                var amountBrute = amountLiquid + irrf;
 
                 if (type is not MovementType.InterestOnEquity)
                 {
                     amountBrute = amountLiquid;
-                    irrf = "0";
+                    irrf = 0;
                 }
                 else
                 {

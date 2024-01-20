@@ -8,12 +8,27 @@ namespace B3MovementExtractorWeb.Helpers
     {
         public static List<string> ExtractEarnings(IEnumerable<string> fileLines, FinancialInstitution institution)
         {
+            var contents = new List<string>();
+
+            foreach (var line in fileLines)
+            {
+                if (line.Contains(MovementType.Dividend) || line.Contains(MovementType.InterestOnEquity))
+                {
+                    contents.Add(line.Replace("XP INVESTIMENTOS CCTVM S/A", "CLEAR CORRETORA - GRUPO XP", StringComparison.CurrentCultureIgnoreCase));
+                    continue;
+                }
+
+                contents.Add(line);
+            }
+
+
             var earnings = new List<string>();
-            var linesInstitution = fileLines.Where(x => x.Contains(institution.Name) || x.Contains(institution.ShortName));
+            var linesInstitution = contents.Where(x => x.Contains(institution.Name) || x.Contains(institution.ShortName));
             var linesEarning = linesInstitution.Where(line => !line.Contains(MovementType.IncomeCanceled) &&
                                                               (line.Contains(MovementType.Dividend) ||
                                                               line.Contains(MovementType.InterestOnEquity) ||
                                                               line.Contains(MovementType.Income)));
+
             foreach (var line in linesEarning)
             {
                 var lineSplit = line.Split(";");
